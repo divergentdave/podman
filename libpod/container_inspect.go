@@ -359,7 +359,7 @@ func (c *Container) generateInspectContainerConfig(spec *spec.Spec) *define.Insp
 	ctrConfig.Image = c.config.RootfsImageName
 	ctrConfig.SystemdMode = c.Systemd()
 
-	// Leave empty is not explicitly overwritten by user
+	// Leave empty if not explicitly overwritten by user
 	if len(c.config.Command) != 0 {
 		ctrConfig.Cmd = []string{}
 		ctrConfig.Cmd = append(ctrConfig.Cmd, c.config.Command...)
@@ -367,7 +367,7 @@ func (c *Container) generateInspectContainerConfig(spec *spec.Spec) *define.Insp
 
 	// Leave empty if not explicitly overwritten by user
 	if len(c.config.Entrypoint) != 0 {
-		ctrConfig.Entrypoint = strings.Join(c.config.Entrypoint, " ")
+		ctrConfig.Entrypoint = c.config.Entrypoint
 	}
 
 	if len(c.config.Labels) != 0 {

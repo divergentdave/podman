@@ -281,7 +281,8 @@ var _ = Describe("Podman create", func() {
 		Expect(ctrJSON).To(HaveLen(1))
 		Expect(ctrJSON[0].Config.Cmd).To(HaveLen(1))
 		Expect(ctrJSON[0].Config.Cmd[0]).To(Equal("redis-server"))
-		Expect(ctrJSON[0].Config.Entrypoint).To(Equal("docker-entrypoint.sh"))
+		Expect(ctrJSON[0].Config.Entrypoint).To(HaveLen(1))
+		Expect(ctrJSON[0].Config.Entrypoint[0]).To(Equal("docker-entrypoint.sh"))
 	})
 
 	It("podman create --pull", func() {
